@@ -10,7 +10,9 @@ var express = require('express'),
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
     var port = 3000;
-    
+    app.get('/', function (req, res) {
+      res.json({message:"Welcome"});
+    });
     app.post('/send-email', function (req, res) {
       let transporter = nodeMailer.createTransport({
           host: 'mail.tinsoft.tech',
