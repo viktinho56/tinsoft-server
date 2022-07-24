@@ -1,11 +1,13 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+const cors = require('cors')
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(cors());
 //const route = express.Router();
 const port = process.env.PORT || 5000;
 const transporter = nodemailer.createTransport({
@@ -24,6 +26,12 @@ app.get('/',(req, res) => {
     })
 })
 app.post('/send-email', (req, res) => {
+    var cors = {
+        origin: "*"
+    };
+    res.header("Access-Control-Allow-Origin", cors.origin);
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.type('application/json');
     let mailOptions = {
         from: req.body.email, // sender address
         to: '"Tinsoft" <contact@tinsoft.tech>,<viktinho56@gmail.com>', // list of receivers
