@@ -17,7 +17,12 @@ const transporter = nodemailer.createTransport({
               pass: '@Hidemyass2'
           }
 });
-
+app.get('/',(req, res) => {
+    res.status(200).send({
+        message: 'Mail Sent',
+       
+    })
+})
 app.post('/send-email', (req, res) => {
     let mailOptions = {
         from: req.body.email, // sender address
